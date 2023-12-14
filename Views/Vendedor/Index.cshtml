@@ -1,0 +1,47 @@
+@model IEnumerable<AmanNayran.Models.Vendedor>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Vendedores</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+<table id="myTable" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td >
+                <a asp-action="Edit" asp-route-id="@item.VendedorId">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.VendedorId">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.VendedorId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,73 @@
+@model IEnumerable<AmanNayran.Models.NotaDeVenda>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Notas de Venda</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+<table id="myTable" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vendedor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transportadora)
+            </th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vendedor.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Transportadora.Nome)
+            </td>
+            <td>
+                <a asp-action="Cancelar" asp-route-id="@item.NotaDeVendaId">Cancelar</a> |
+                <a asp-action="Devolver" asp-route-id="@item.NotaDeVendaId">Devolver</a> |
+                <a asp-action="Edit" asp-route-id="@item.NotaDeVendaId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.NotaDeVendaId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.NotaDeVendaId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                }
+            });
+        });
+    </script>
+}
